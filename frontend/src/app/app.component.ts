@@ -1,12 +1,10 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatIconModule} from '@angular/material/icon';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {NgIf} from '@angular/common';
 import {Router, RouterLink, RouterOutlet} from '@angular/router';
 import {MatCheckbox} from '@angular/material/checkbox';
 
@@ -21,8 +19,6 @@ import {MatCheckbox} from '@angular/material/checkbox';
     MatCardModule,
     MatSlideToggleModule,
     MatIconModule,
-    MatToolbarModule,
-    NgIf,
     RouterOutlet,
     RouterLink,
     MatCheckbox
