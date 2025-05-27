@@ -1,5 +1,4 @@
 <div class="min-h-screen bg-gray-100 font-['Inter'] p-4 sm:p-6 md:p-8">
-  <!-- Kopfzeile -->
   <div class="flex justify-between items-center mb-6">
     <h1 class="text-xl sm:text-2xl font-bold text-gray-700">👤 Benutzername</h1>
     <div class="space-x-4 text-sm sm:text-base">
@@ -7,11 +6,7 @@
       <a routerLink="/logout" class="text-gray-600 hover:underline">Logout</a>
     </div>
   </div>
-
-  <!-- Karten-Grid -->
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full md:max-w-6xl md:mx-auto">
-
-    <!-- Schritte heute -->
     <mat-card class="h-[25vh] lg:h-auto w-full p-6 rounded-2xl shadow-md flex flex-col items-center justify-center">
       <div class="flex items-center mb-2 text-2xl font-semibold text-gray-700">
         <mat-icon class="mr-2 text-yellow-500">directions_walk</mat-icon>
@@ -20,8 +15,6 @@
       <div class="text-5xl font-bold text-green-600 mb-2">10000</div>
       <div class="text-green-500 font-medium">✔ Ziel erreicht</div>
     </mat-card>
-
-    <!-- Ziel -->
     <mat-card routerLink="/step-goal" class="h-[25vh] lg:h-auto w-full p-6 rounded-2xl shadow-md flex flex-col justify-between cursor-pointer">
       <div>
         <div class="flex items-center mb-2 text-2xl font-semibold text-gray-700">
@@ -32,8 +25,6 @@
       </div>
       <mat-progress-bar mode="determinate" value="83" color="primary"></mat-progress-bar>
     </mat-card>
-
-    <!-- Schritte hinzufügen -->
     <mat-card class="h-[25vh] lg:h-auto w-full p-6 rounded-2xl shadow-md flex flex-col items-center justify-center">
       <div class="flex items-center mb-4 text-2xl font-semibold text-gray-700">
         <mat-icon class="mr-2 text-blue-600">event</mat-icon>
@@ -43,8 +34,6 @@
         <mat-icon>add</mat-icon>
       </button>
     </mat-card>
-
-    <!-- Verlauf heute -->
     <mat-card class="h-[25vh] lg:h-auto w-full p-6 rounded-2xl shadow-md flex flex-col justify-between">
       <div>
         <div class="flex items-center mb-2 text-2xl font-semibold text-gray-700">
@@ -61,6 +50,5 @@
         </ul>
       </div>
     </mat-card>
-
   </div>
 </div>
