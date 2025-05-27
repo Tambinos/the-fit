@@ -1,0 +1,5 @@
+button.mat-raised-button.py-4,
+button.mat-flat-button.py-4 {
+  height: auto;
+  min-height: 56px;
+}
