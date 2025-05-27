@@ -3,6 +3,7 @@ import {RouterLink} from '@angular/router';
 import {MatIconButton} from '@angular/material/button';
 import {MatCard} from '@angular/material/card';
 import {MatIcon} from '@angular/material/icon';
+import {MatProgressBar} from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-app-home',
@@ -10,7 +11,8 @@ import {MatIcon} from '@angular/material/icon';
     RouterLink,
     MatIconButton,
     MatCard,
-    MatIcon
+    MatIcon,
+    MatProgressBar
   ],
   standalone: true,
   templateUrl: './home.component.html',
