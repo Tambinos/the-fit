@@ -1,0 +1,32 @@
+/* src/styles.css */
+
+/* 1. Correct Tailwind CSS directives FIRST */
+
+/* 2. Import Google Fonts (Material Icons and any other fonts like Inter if you add it back) */
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+/* 3. Import Angular Material Theme LAST */
+/* This is the crucial missing part for Mat Icons and other Material components */
+/* Choose one of the prebuilt themes. 'indigo-pink.css' is a common choice. */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+@import "tailwindcss";
+
+/* You can pick a different prebuilt theme if you prefer:
+   @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+   @import '@angular/material/prebuilt-themes/purple-green.css';
+   @import '@angular/material/prebuilt-themes/pink-bluegrey.css';
+*/
+
+/* 4. Your global HTML/body styles */
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Note: If you want 'Inter' font, you'd add its @import url here and set font-family: 'Inter', sans-serif; */
+
+/* Any other custom global styles below this */
