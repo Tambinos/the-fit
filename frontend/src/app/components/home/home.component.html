@@ -1,44 +1,66 @@
-<div class="min-h-screen bg-gray-100 flex items-center justify-center p-4 sm:p-6 md:p-8 font-['Inter']">
-  <mat-card class="w-full max-w-md bg-white rounded-3xl shadow-lg overflow-hidden flex flex-col">
-
-    <div class="p-6 sm:p-8 flex-grow flex flex-col items-center justify-center">
-      <h2 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-8">Activity</h2>
-
-      <div routerLink="/step-goal" class="relative w-48 h-48 sm:w-56 sm:h-56 flex items-center justify-center mb-12">
-        <div class="w-full h-full rounded-full border-4 border-green-500 flex items-center justify-center">
-          <div class="text-center">
-            <span class="text-xl sm:text-2xl font-semibold text-gray-700 block">Steps:</span>
-            <span class="text-3xl sm:text-4xl font-bold text-green-600">10000</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="w-full space-y-6">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center space-x-2">
-            <span class="text-base sm:text-lg font-medium text-gray-700">Steps</span>
-            <span class="text-green-600 text-xl sm:text-2xl font-bold">2000</span>
-            <span class="text-gray-400 text-sm">++++++++++</span> </div>
-          <span class="text-sm text-gray-500">10:00 - 11:30</span>
-        </div>
-
-        <div class="flex items-center justify-between">
-          <div class="flex items-center space-x-2">
-            <span class="text-base sm:text-lg font-medium text-gray-700">Steps</span>
-            <span class="text-green-600 text-xl sm:text-2xl font-bold">500</span>
-            <span class="text-gray-400 text-sm">++</span> </div>
-          <span class="text-sm text-gray-500">8:20 - 8:40</span>
-        </div>
-      </div>
+<div class="min-h-screen bg-gray-100 font-['Inter'] p-4 sm:p-6 md:p-8">
+  <!-- Kopfzeile -->
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-xl sm:text-2xl font-bold text-gray-700">👤 Benutzername</h1>
+    <div class="space-x-4 text-sm sm:text-base">
+      <a routerLink="/settings" class="text-gray-600 hover:underline">Einstellungen</a>
+      <a routerLink="/logout" class="text-gray-600 hover:underline">Logout</a>
     </div>
+  </div>
 
-    <div class="p-4 bg-gray-50 flex items-center justify-around border-t border-gray-200">
-      <button routerLink="/steps" mat-icon-button class="p-3 rounded-full bg-blue-500 text-white shadow-md">
+  <!-- Karten-Grid -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full md:max-w-6xl md:mx-auto">
+
+    <!-- Schritte heute -->
+    <mat-card class="h-[25vh] lg:h-auto w-full p-6 rounded-2xl shadow-md flex flex-col items-center justify-center">
+      <div class="flex items-center mb-2 text-2xl font-semibold text-gray-700">
+        <mat-icon class="mr-2 text-yellow-500">directions_walk</mat-icon>
+        Schritte heute
+      </div>
+      <div class="text-5xl font-bold text-green-600 mb-2">10000</div>
+      <div class="text-green-500 font-medium">✔ Ziel erreicht</div>
+    </mat-card>
+
+    <!-- Ziel -->
+    <mat-card routerLink="/step-goal" class="h-[25vh] lg:h-auto w-full p-6 rounded-2xl shadow-md flex flex-col justify-between cursor-pointer">
+      <div>
+        <div class="flex items-center mb-2 text-2xl font-semibold text-gray-700">
+          <mat-icon class="mr-2 text-green-600">track_changes</mat-icon>
+          Ziel
+        </div>
+        <div class="text-gray-600 mb-2">12 000 Schritte</div>
+      </div>
+      <mat-progress-bar mode="determinate" value="83" color="primary"></mat-progress-bar>
+    </mat-card>
+
+    <!-- Schritte hinzufügen -->
+    <mat-card class="h-[25vh] lg:h-auto w-full p-6 rounded-2xl shadow-md flex flex-col items-center justify-center">
+      <div class="flex items-center mb-4 text-2xl font-semibold text-gray-700">
+        <mat-icon class="mr-2 text-blue-600">event</mat-icon>
+        Schritte hinzufügen
+      </div>
+      <button routerLink="/steps" mat-icon-button color="primary" class="bg-blue-500 text-white p-4 rounded-full shadow cursor-pointer">
         <mat-icon>add</mat-icon>
       </button>
-      <button routerLink="/settings" mat-icon-button class="p-3 rounded-full text-gray-600 hover:bg-gray-200">
-        <mat-icon>settings</mat-icon>
-      </button>
-    </div>
-  </mat-card>
+    </mat-card>
+
+    <!-- Verlauf heute -->
+    <mat-card class="h-[25vh] lg:h-auto w-full p-6 rounded-2xl shadow-md flex flex-col justify-between">
+      <div>
+        <div class="flex items-center mb-2 text-2xl font-semibold text-gray-700">
+          <mat-icon class="mr-2 text-purple-600">bar_chart</mat-icon>
+          Verlauf heute
+        </div>
+        <ul class="space-y-2">
+          <li class="flex justify-between text-gray-600">
+            <span>2000 Schritte</span><span>10:00 - 11:30</span>
+          </li>
+          <li class="flex justify-between text-gray-600">
+            <span>500 Schritte</span><span>8:20 - 8:40</span>
+          </li>
+        </ul>
+      </div>
+    </mat-card>
+
+  </div>
 </div>
