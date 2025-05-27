@@ -4,7 +4,7 @@ import {Component} from '@angular/core';
 import {MatSlideToggle} from '@angular/material/slide-toggle';
 import {MatButton} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -14,6 +14,7 @@ import {Router} from '@angular/router';
     MatSlideToggle,
     MatButton,
     FormsModule,
+    RouterLink,
   ],
   styleUrls: ['./settings.component.css']
 })
@@ -27,15 +28,6 @@ export class SettingsComponent {
   }
 
   saveSettings() {
-    console.log('Settings saved:', {
-      locationAccess: this.locationAccess,
-      notifications: this.notifications,
-      cookies: this.cookies
-    });
-    this.router.navigate(['/home'])
-  }
-
-  cancel() {
     this.router.navigate(['/home'])
   }
 }
