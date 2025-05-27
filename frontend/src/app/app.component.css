@@ -1,0 +1,35 @@
+.mat-form-field.w-full {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+button.mat-raised-button.py-3 {
+  height: auto;
+  min-height: 48px;
+  font-size: 1.125rem;
+}
+
+.mat-icon-button.mat-suffix {
+  width: 40px;
+  height: 40px;
+}
+
+.mat-icon-button .mat-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
