@@ -1,0 +1,13 @@
+.mat-form-field.w-full {
+  display: block;
+}
+
+.mat-form-field input.mat-input-element {
+  text-align: center;
+}
+
+button.mat-raised-button.py-4,
+button.mat-flat-button.py-4 {
+  height: auto;
+  min-height: 56px;
+}
