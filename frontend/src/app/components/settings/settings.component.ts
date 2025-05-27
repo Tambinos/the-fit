@@ -2,10 +2,8 @@
 
 import {Component} from '@angular/core';
 import {MatSlideToggle} from '@angular/material/slide-toggle';
-import {MatCard, MatCardActions, MatCardContent, MatCardHeader} from '@angular/material/card';
 import {MatButton} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
-import {MatIcon} from '@angular/material/icon';
 import {Router} from '@angular/router';
 
 @Component({
@@ -14,13 +12,8 @@ import {Router} from '@angular/router';
   templateUrl: './settings.component.html',
   imports: [
     MatSlideToggle,
-    MatCardActions,
-    MatIcon,
     MatButton,
     FormsModule,
-    MatCard,
-    MatCardHeader,
-    MatCardContent
   ],
   styleUrls: ['./settings.component.css']
 })
