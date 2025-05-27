@@ -35,7 +35,7 @@ export class AppComponent {
   username = '';
   password = '';
   hidePassword = true; // For the password visibility toggle
-
+  register = false;
   constructor(private router: Router) {
   }
 
