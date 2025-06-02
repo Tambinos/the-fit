@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit{
 
   totalSteps = 0
   stepRecords: any[] = [];
+  username = '';
 
   constructor(private stepInputService: StepInputService, private pb: PocketBaseService, private router: Router) {
   }
@@ -33,6 +34,14 @@ export class HomeComponent implements OnInit{
       this.stepRecords = steps;
       this.totalSteps = this.getTotalSteps();
     });
+    this.pb.currentUser$.subscribe(user => {
+      if (user) {
+        this.username = user.email;
+      } else {
+        this.router.navigate(['/']);
+      }
+    });
+
   }
 
   getTotalSteps(): number {
