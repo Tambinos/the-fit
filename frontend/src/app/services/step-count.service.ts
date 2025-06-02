@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {DeviceMotionAccelerationData} from '@awesome-cordova-plugins/device-motion';
 import {BehaviorSubject, Subscription} from 'rxjs';
-import {DeviceMotion} from '@awesome-cordova-plugins/device-motion/ngx';
+import { DeviceMotion, DeviceMotionAccelerationData } from '@awesome-cordova-plugins/device-motion/ngx';
+
 
 declare let window: any;
 
@@ -16,7 +16,8 @@ export class StepCountService {
 
   steps$ = new BehaviorSubject<number>(0);
 
-  constructor(private deviceMotion: typeof DeviceMotion) {}
+
+  constructor(private deviceMotion: DeviceMotion) {}
 
   startTracking() {
     this.subscription = this.deviceMotion.watchAcceleration({ frequency: 100 }).subscribe((accel: any) => {

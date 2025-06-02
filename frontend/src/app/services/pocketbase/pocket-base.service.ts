@@ -2,13 +2,14 @@ import { Injectable, NgZone } from '@angular/core';
 import PocketBase from 'pocketbase';
 import { BehaviorSubject, Observable, from, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import {User} from '../../entities/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PocketBaseService {
 
-  private apiUrl = 'http://127.0.0.1:8090';
+  private apiUrl = 'http://172.29.240.1:8090';
   pb: PocketBase;
 
   private _isLoggedIn = new BehaviorSubject<boolean>(false);
@@ -35,13 +36,8 @@ export class PocketBaseService {
     this._currentUser.next(this.pb.authStore.model);
   }
 
-  register(username: string, password: string, passwordConfirm: string): Observable<any> {
-    const data = {
-      username,
-      password,
-      passwordConfirm,
-    };
-    return from(this.pb.collection('users').create(data)).pipe(
+  register(user: User): Observable<any> {
+    return from(this.pb.collection('users').create(user)).pipe(
       catchError(error => {
         console.error('PocketBase signUp error:', error);
         return throwError(() => error);
@@ -49,8 +45,8 @@ export class PocketBaseService {
     );
   }
 
-  signIn(username: string, password: string): Observable<any> {
-    return from(this.pb.collection('users').authWithPassword(username, password)).pipe(
+  signIn(email: string, password: string): Observable<any> {
+    return from(this.pb.collection('users').authWithPassword(email, password)).pipe(
       catchError(error => {
         console.error('PocketBase signIn error:', error);
         return throwError(() => error);
