@@ -32,7 +32,6 @@ export class HomeComponent implements OnInit{
     this.stepInputService.getTodayStepsForUser().subscribe(steps => {
       this.stepRecords = steps;
       this.totalSteps = this.getTotalSteps();
-      console.log('Todays steps:', steps);
     });
   }
 
@@ -43,5 +42,10 @@ export class HomeComponent implements OnInit{
   logout() {
     this.pb.signOut()
     this.router.navigate(['/']);
+  }
+
+  getRightDate(data: Date): string {
+    const date = new Date(data);
+    return date.getHours() + ":" + date.getMinutes();
   }
 }

@@ -41,12 +41,12 @@
           Verlauf heute
         </div>
         <ul class="space-y-2">
-          <li class="flex justify-between text-gray-600">
-            <span>2000 Schritte</span><span>10:00 - 11:30</span>
-          </li>
-          <li class="flex justify-between text-gray-600">
-            <span>500 Schritte</span><span>8:20 - 8:40</span>
-          </li>
+          @for (record of stepRecords; track record) {
+            <li class="flex justify-between text-gray-600">
+              <span>{{ record.steps }} Schritte</span>
+              <span>{{ this.getRightDate(record.created) }}</span>
+            </li>
+          }
         </ul>
       </div>
     </mat-card>
