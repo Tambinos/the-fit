@@ -64,7 +64,7 @@ export class AppComponent {
       const user = {
         email: this.email,
         password: this.password,
-        repeatedPassword: this.repeatedPassword,
+        passwordConfirm: this.repeatedPassword,
         stepGoal: 10000,
         locationAccess: false,
         notificationsEnabled: false
