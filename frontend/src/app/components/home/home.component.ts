@@ -4,6 +4,8 @@ import {MatIconButton} from '@angular/material/button';
 import {MatCard} from '@angular/material/card';
 import {MatIcon} from '@angular/material/icon';
 import {MatProgressBar} from '@angular/material/progress-bar';
+import {StepCountService} from '../../services/step-count.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-app-home',
@@ -20,4 +22,15 @@ import {MatProgressBar} from '@angular/material/progress-bar';
 })
 export class HomeComponent {
 
+  stepCount = 0;
+  private subscription: Subscription | undefined;
+
+  constructor(private stepService: StepCountService) {}
+
+  ngOnInit(): void {
+    this.stepService.startTracking();
+    this.subscription = this.stepService.steps$.subscribe((count) => {
+      this.stepCount = count;
+    });
+  }
 }

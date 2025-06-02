@@ -7,7 +7,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatIconModule} from '@angular/material/icon';
 import {Router, RouterLink, RouterOutlet} from '@angular/router';
 import {MatCheckbox} from '@angular/material/checkbox';
-import {PocketBaseService} from './pocketbase/pocket-base.service';
+import {PocketBaseService} from './services/pocketbase/pocket-base.service';
+
 
 @Component({
   selector: 'app-root',
