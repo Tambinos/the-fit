@@ -9,7 +9,7 @@ import {User} from '../../entities/user';
 })
 export class PocketBaseService {
 
-  private apiUrl = 'http://172.29.240.1:8090';
+  private apiUrl = 'http://127.0.0.1:8090';
   pb: PocketBase;
 
   private _isLoggedIn = new BehaviorSubject<boolean>(false);

@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable, NgZone} from '@angular/core';
 import {BehaviorSubject, Subscription} from 'rxjs';
 import { DeviceMotion, DeviceMotionAccelerationData } from '@awesome-cordova-plugins/device-motion/ngx';
+import {Platform} from '@angular/cdk/platform';
 
 
 declare let window: any;
@@ -10,41 +11,48 @@ declare let window: any;
 })
 export class StepCountService {
   private stepCount = 0;
-  private lastAccel: DeviceMotionAccelerationData = { x: 0, y: 0, z: 0, timestamp: 0 };
-  private subscription: Subscription | undefined;
-  private threshold = 2.0;
+  private lastAccel = { x: 0, y: 0, z: 0 };
+  private threshold = 12;
+  private lastUpdate = 0;
 
-  steps$ = new BehaviorSubject<number>(0);
+  private steps$ = new BehaviorSubject<number>(0);
+  steps = this.steps$.asObservable();
 
+  constructor(private ngZone: NgZone) {}
 
-  constructor(private deviceMotion: DeviceMotion) {}
+  private motionHandler = (event: DeviceMotionEvent) => {
+    const acc = event.accelerationIncludingGravity;
+    if (!acc) return;
 
-  startTracking() {
-    this.subscription = this.deviceMotion.watchAcceleration({ frequency: 100 }).subscribe((accel: any) => {
-      const delta =
-        Math.abs(accel.x - this.lastAccel.x) +
-        Math.abs(accel.y - this.lastAccel.y) +
-        Math.abs(accel.z - this.lastAccel.z);
+    const now = Date.now();
+    if (now - this.lastUpdate < 400) return;
 
-      if (delta > this.threshold) {
+    const dx = Math.abs(acc.x! - this.lastAccel.x);
+    const dy = Math.abs(acc.y! - this.lastAccel.y);
+    const dz = Math.abs(acc.z! - this.lastAccel.z);
+    const total = dx + dy + dz;
+
+    if (total > this.threshold) {
+      this.ngZone.run(() => {
         this.stepCount++;
         this.steps$.next(this.stepCount);
-      }
+      });
+      this.lastUpdate = now;
+    }
 
-      this.lastAccel = accel;
-    });
+    this.lastAccel = { x: acc.x!, y: acc.y!, z: acc.z! };
+  };
+
+  startTracking() {
+    window.addEventListener('devicemotion', this.motionHandler);
   }
 
   stopTracking() {
-    this.subscription?.unsubscribe();
+    window.removeEventListener('devicemotion', this.motionHandler);
   }
 
-  resetSteps() {
+  reset() {
     this.stepCount = 0;
-    this.steps$.next(this.stepCount);
-  }
-
-  ngOnDestroy(): void {
-    this.stopTracking();
+    this.steps$.next(0);
   }
 }
