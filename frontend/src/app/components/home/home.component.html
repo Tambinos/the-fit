@@ -15,13 +15,13 @@
       <div class="text-5xl font-bold text-green-600 mb-2">{{ this.totalSteps }}</div>
       <div class="text-green-500 font-medium">✔ Ziel erreicht</div>
     </mat-card>
-    <mat-card routerLink="/step-goal" class="h-[25vh] lg:h-auto w-full p-6 rounded-2xl shadow-md flex flex-col justify-between cursor-pointer">
+    <mat-card routerLink="/step-goal"
+              class="h-[25vh] lg:h-auto w-full p-6 rounded-2xl shadow-md flex flex-col justify-between cursor-pointer">
       <div>
         <div class="flex items-center mb-2 text-2xl font-semibold text-gray-700">
           <mat-icon class="mr-2 text-green-600">track_changes</mat-icon>
-          Ziel
+          Schritteziel: {{ stepGoal }}
         </div>
-        <div class="text-gray-600 mb-2">12 000 Schritte</div>
       </div>
       <mat-progress-bar mode="determinate" value="83" color="primary"></mat-progress-bar>
     </mat-card>
@@ -30,7 +30,8 @@
         <mat-icon class="mr-2 text-blue-600">event</mat-icon>
         Schritte hinzufügen
       </div>
-      <button routerLink="/steps" mat-icon-button color="primary" class="bg-blue-500 text-white p-4 rounded-full shadow cursor-pointer">
+      <button routerLink="/steps" mat-icon-button color="primary"
+              class="bg-blue-500 text-white p-4 rounded-full shadow cursor-pointer">
         <mat-icon>add</mat-icon>
       </button>
     </mat-card>
