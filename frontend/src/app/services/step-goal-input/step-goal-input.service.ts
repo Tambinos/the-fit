@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {PocketBaseService} from '../pocketbase/pocket-base.service';
-import {Observable} from 'rxjs';
+import {Observable, switchMap, take} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +11,12 @@ export class StepGoalInputService {
   }
 
   saveStepGoal(stepInput: Number) {
-    this.pb.currentUser$.subscribe(user => {
-      user.stepGoal = stepInput;
-      this.pb.updateRecord("users", user.id, user).subscribe();
-    })
+    return this.pb.currentUser$.pipe(
+      take(1),
+      switchMap(user => {
+        user.stepGoal = stepInput;
+        return this.pb.updateRecord("users", user.id, user);
+      })
+    );
   }
 }

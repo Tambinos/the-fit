@@ -27,11 +27,16 @@ export class StepInputComponent {
 
   addSteps() {
     if (this.manualSteps && this.manualSteps > 0) {
-      if (this.manualSteps) this.stepInputService.saveSteps(this.manualSteps)
-      this.router.navigate(['/home'])
-    } else {
-      this.manualSteps = null;
-      this.router.navigate(['/home'])
+      this.stepInputService.saveSteps(this.manualSteps).subscribe(
+        response => {
+          console.log('Steps saved successfully:', response);
+          this.router.navigate(['/home']);
+        },
+        error => {
+          console.error('Error saving steps:', error);
+          alert("Error saving steps. Please try again.");
+        }
+      )
     }
   }
 }
