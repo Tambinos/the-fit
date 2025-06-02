@@ -1,9 +1,10 @@
-import {Component} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
 import {MatIconButton} from '@angular/material/button';
 import {MatCard} from '@angular/material/card';
 import {MatIcon} from '@angular/material/icon';
 import {MatProgressBar} from '@angular/material/progress-bar';
+import {StepInputService} from '../../services/step-input/step-input.service';
 import {PocketBaseService} from '../../services/pocketbase/pocket-base.service';
 
 @Component({
@@ -19,14 +20,28 @@ import {PocketBaseService} from '../../services/pocketbase/pocket-base.service';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
 
-  constructor(private pb: PocketBaseService, private router: Router) {
+  totalSteps = 0
+  stepRecords: any[] = [];
+
+  constructor(private stepInputService: StepInputService, private pb: PocketBaseService, private router: Router) {
+  }
+
+  ngOnInit() {
+    this.stepInputService.getTodayStepsForUser().subscribe(steps => {
+      this.stepRecords = steps;
+      this.totalSteps = this.getTotalSteps();
+      console.log('Todays steps:', steps);
+    });
+  }
+
+  getTotalSteps(): number {
+    return this.stepRecords.reduce((sum, record) => sum + (record.steps || 0), 0);
   }
 
   logout() {
     this.pb.signOut()
     this.router.navigate(['/']);
   }
-
 }
