@@ -21,7 +21,6 @@ import {StepInputService} from '../../services/step-input/step-input.service';
 })
 export class StepInputComponent {
   manualSteps: number | null = null;
-  steps = 0;
 
   constructor(private router: Router, private stepInputService: StepInputService) {
   }
