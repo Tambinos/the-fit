@@ -3,7 +3,7 @@
     <h1 class="text-xl sm:text-2xl font-bold text-gray-700">👤 Benutzername</h1>
     <div class="space-x-4 text-sm sm:text-base">
       <a routerLink="/settings" class="text-gray-600 hover:underline">Einstellungen</a>
-      <a routerLink="/logout" class="text-gray-600 hover:underline">Logout</a>
+      <a (click)="logout()" class="text-gray-600 hover:underline">Logout</a>
     </div>
   </div>
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full md:max-w-6xl md:mx-auto">

@@ -21,18 +21,22 @@ import {StepInputService} from '../../services/step-input/step-input.service';
 })
 export class StepInputComponent {
   manualSteps: number | null = null;
-  steps = 0;
 
   constructor(private router: Router, private stepInputService: StepInputService) {
   }
 
   addSteps() {
     if (this.manualSteps && this.manualSteps > 0) {
-      if (this.manualSteps) this.stepInputService.saveSteps(this.manualSteps)
-      this.router.navigate(['/home'])
-    } else {
-      this.manualSteps = null;
-      this.router.navigate(['/home'])
+      this.stepInputService.saveSteps(this.manualSteps).subscribe(
+        response => {
+          console.log('Steps saved successfully:', response);
+          this.router.navigate(['/home']);
+        },
+        error => {
+          console.error('Error saving steps:', error);
+          alert("Error saving steps. Please try again.");
+        }
+      )
     }
   }
 }
