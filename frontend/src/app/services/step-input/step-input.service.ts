@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {PocketBaseService} from '../pocketbase/pocket-base.service';
 import {Steps} from '../../entities/steps';
-import {switchMap, take} from 'rxjs';
+import {map, Observable, switchMap, take} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,20 @@ export class StepInputService {
     );
   }
 
-  getSteps(userId: Number) {
-
+  getTodayStepsForUser(): Observable<any[]> {
+    return this.pb.currentUser$.pipe(
+      switchMap(user =>
+        this.pb.getCollection("steps", {
+          filter: `user_id = "${user.id}"`,
+          sort: '-created'
+        }).pipe(
+          map(steps => {
+            const today = new Date().toISOString().split('T')[0];
+            return steps.filter((step: any) => {
+              const stepDate = new Date(step.created).toISOString().split('T')[0];
+              return stepDate === today;
+            });
+          })
+        )));
   }
 }
