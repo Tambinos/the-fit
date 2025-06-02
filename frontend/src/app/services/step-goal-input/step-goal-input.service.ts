@@ -1,17 +1,19 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {PocketBaseService} from '../pocketbase/pocket-base.service';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StepGoalInputService {
 
-  constructor() { }
-
-  saveStepGoal(stepInput: Number){
-    console.log(stepInput)
+  constructor(private pb: PocketBaseService) {
   }
 
-  getStepGoal(userId: Number){
-
+  saveStepGoal(stepInput: Number) {
+    this.pb.currentUser$.subscribe(user => {
+      user.stepGoal = stepInput;
+      this.pb.updateRecord("users", user.id, user).subscribe();
+    })
   }
 }

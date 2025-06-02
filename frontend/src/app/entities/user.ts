@@ -1,10 +1,11 @@
 export interface User {
-  id: number;
-  username: string;
+  id?: number;
+  email: string;
   password: string;
+  repeatedPassword?: string; // Optional for registration
   stepGoal: number;
-  locationAccess: string
+  locationAccess: boolean
   notificationsEnabled: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

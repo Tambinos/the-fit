@@ -7,7 +7,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatIconModule} from '@angular/material/icon';
 import {Router, RouterLink, RouterOutlet} from '@angular/router';
 import {MatCheckbox} from '@angular/material/checkbox';
-import {PocketBaseService} from './pocketbase/pocket-base.service';
+import {PocketBaseService} from './services/pocketbase/pocket-base.service';
 
 @Component({
   selector: 'app-root',
@@ -28,7 +28,7 @@ import {PocketBaseService} from './pocketbase/pocket-base.service';
 })
 export class AppComponent {
   isLoggedIn = false;
-  username = '';
+  email = '';
   password = '';
   repeatedPassword = '';
   hidePassword = true;
@@ -45,8 +45,8 @@ export class AppComponent {
   }
 
   login() {
-    if (this.username && this.password) {
-      this.pb.signIn(this.username, this.password).subscribe({
+    if (this.email && this.password) {
+      this.pb.signIn(this.email, this.password).subscribe({
         next: (response) => {
           console.log('Login successful:', response);
           this.router.navigate(['/home']);
@@ -60,11 +60,16 @@ export class AppComponent {
   }
 
   register() {
-    if (this.username && this.password) {
-      this.pb.register(
-        this.username,
-        this.password,
-        this.password
+    if (this.email && this.password) {
+      const user = {
+        email: this.email,
+        password: this.password,
+        repeatedPassword: this.repeatedPassword,
+        stepGoal: 10000,
+        locationAccess: false,
+        notificationsEnabled: false
+      }
+      this.pb.register(user
       ).subscribe({
         next: (response) => {
           this.login();
