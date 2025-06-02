@@ -15,9 +15,6 @@ export class StepInputService {
         user_id: user.id,
         steps: stepInput,
       };
-      console.log(user.id)
-      console.log(steps)
-
       this.pb.createRecord('steps', steps).subscribe(response => {
         console.log('Step goal saved successfully:', response);
       }, error => {
