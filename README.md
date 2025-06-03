@@ -1,7 +1,7 @@
 # The Fit
 
 ## Setup ##
-Alle Schritte werden in der frontend directory ausgeführt.
+#### Alle Schritte werden in der frontend directory ausgeführt. ####
 ### DB Setup ###
 
 Die Pocketbase kann mit folgendem Befehl gestartet werden:
