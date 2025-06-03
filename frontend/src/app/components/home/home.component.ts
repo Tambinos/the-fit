@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
         this.stepRecords = this.filterStepsByViewRange(steps, this.stepViewRange);
         const today = new Date().toISOString().split('T')[0];
         this.todayStepRecords = steps.filter(s =>
-          new Date(s.updated).toISOString().split('T')[0] === today
+          new Date(s.created).toISOString().split('T')[0] === today
         );
 
         this.totalSteps = this.getTotalSteps(this.todayStepRecords);
@@ -80,7 +80,7 @@ export class HomeComponent implements OnInit {
     const now = new Date();
 
     return steps.filter(step => {
-      const date = new Date(step.updated);
+      const date = new Date(step.created);
 
       switch (range) {
         case 'daily':
