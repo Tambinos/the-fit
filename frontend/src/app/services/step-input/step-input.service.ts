@@ -46,20 +46,18 @@ export class StepInputService {
     );
   }
 
-  getTodayStepsForUser(): Observable<any[]> {
+  getAllStepsForUser(): Observable<any[]> {
     return this.pb.currentUser$.pipe(
       switchMap(user =>
         this.pb.getCollection("steps", {
           filter: `user_id = "${user.id}"`,
-          sort: '-created'
+          sort: '-created',
+
         }).pipe(
-          map(steps => {
-            const today = new Date().toISOString().split('T')[0];
-            return steps.filter((step: any) => {
-              const stepDate = new Date(step.created).toISOString().split('T')[0];
-              return stepDate === today;
-            });
-          })
-        )));
+          map(steps => steps || [])
+        )
+      )
+    );
   }
+
 }

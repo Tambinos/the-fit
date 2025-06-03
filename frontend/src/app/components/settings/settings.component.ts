@@ -7,6 +7,7 @@ import {FormsModule} from '@angular/forms';
 import {Router, RouterLink} from '@angular/router';
 import {PocketBaseService} from '../../services/pocketbase/pocket-base.service';
 import {SettingsService} from '../../services/settings/settings.service';
+import {StepViewRange} from '../../enums/step-view.enum';
 
 @Component({
   selector: 'app-settings',
@@ -23,19 +24,23 @@ import {SettingsService} from '../../services/settings/settings.service';
 export class SettingsComponent {
   locationAccess = false;
   notifications = false;
+  stepViewRange: StepViewRange = StepViewRange.DAILY;
+  StepViewRange = StepViewRange;
+
 
 
   constructor(private router: Router, private settingsService: SettingsService, private pb: PocketBaseService) {
     this.pb.currentUser$.subscribe(user => {
       this.locationAccess = user.locationAccess;
       this.notifications = user.notificationsEnabled;
+      this.stepViewRange = user.stepViewRange ?? StepViewRange.DAILY;
+
     });
   }
 
   saveSettings() {
     this.settingsService.saveSettings(
-      this.locationAccess,
-      this.notifications
+      this.stepViewRange
     ).subscribe(
       response => {
         console.log('Settings saved successfully:', response);
