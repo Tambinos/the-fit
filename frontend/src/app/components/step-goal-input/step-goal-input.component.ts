@@ -27,11 +27,18 @@ export class StepGoalInputComponent {
 
   addStepGoal() {
     if (this.manualSteps && this.manualSteps > 0) {
-      if (this.manualSteps) this.stepGoalInputService.saveStepGoal(this.manualSteps)
-      this.router.navigate(['/home'])
+      this.stepGoalInputService.saveStepGoal(this.manualSteps).subscribe({
+        next: () => {
+          this.router.navigate(['/home']);
+        },
+        error: (err) => {
+          console.error('Error saving step goal:', err);
+          alert('Failed to save step goal. Please try again.');
+        }
+      });
     } else {
       this.manualSteps = null;
-      this.router.navigate(['/home'])
+      alert('Please enter a valid step goal.');
     }
   }
 }
