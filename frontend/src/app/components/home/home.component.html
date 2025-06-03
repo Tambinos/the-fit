@@ -50,7 +50,7 @@
           @for (record of stepRecords; track record) {
             <li class="flex justify-between items-center text-gray-600 w-full">
               <span class="w-1/3">{{ record.steps }} Schritte</span>
-              <span class="w-1/3 text-center">{{ this.getFormattedTime(record.updated) }}</span>
+              <span class="w-1/3 text-center">{{ this.getFormattedTime(record.created) }}</span>
               <span class="w-1/3 text-right">
             <button (click)="editSteps(record.id)" mat-icon-button>
               <mat-icon>edit</mat-icon>
