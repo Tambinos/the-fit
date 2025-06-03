@@ -23,12 +23,19 @@ import {PocketBaseService} from '../../services/pocketbase/pocket-base.service';
 export class HomeComponent implements OnInit{
 
   totalSteps = 0
+  stepGoal = 0;
   stepRecords: any[] = [];
 
   constructor(private stepInputService: StepInputService, private pb: PocketBaseService, private router: Router) {
+
   }
 
   ngOnInit() {
+    this.pb.currentUser$.subscribe(
+      user => {
+        this.stepGoal = user?.stepGoal;
+      }
+    )
     this.stepInputService.getTodayStepsForUser().subscribe(steps => {
       this.stepRecords = steps;
       this.totalSteps = this.getTotalSteps();
