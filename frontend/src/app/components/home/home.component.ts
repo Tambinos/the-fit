@@ -27,14 +27,15 @@ export class HomeComponent implements OnInit{
   stepRecords: any[] = [];
 
   constructor(private stepInputService: StepInputService, private pb: PocketBaseService, private router: Router) {
+
+  }
+
+  ngOnInit() {
     this.pb.currentUser$.subscribe(
       user => {
         this.stepGoal = user?.stepGoal;
       }
     )
-  }
-
-  ngOnInit() {
     this.stepInputService.getTodayStepsForUser().subscribe(steps => {
       this.stepRecords = steps;
       this.totalSteps = this.getTotalSteps();

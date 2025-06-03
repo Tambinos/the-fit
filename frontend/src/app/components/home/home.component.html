@@ -12,8 +12,13 @@
         <mat-icon class="mr-2 text-yellow-500">directions_walk</mat-icon>
         Schritte heute
       </div>
-      <div class="text-5xl font-bold text-green-600 mb-2">{{ this.totalSteps }}</div>
-      <div class="text-green-500 font-medium">✔ Ziel erreicht</div>
+      @if (this.totalSteps >= this.stepGoal) {
+        <div class="text-5xl font-bold text-green-400 mb-2">{{ this.totalSteps }}</div>
+        <div class="text-green-400 font-medium">✔ Ziel erreicht</div>
+      } @else {
+        <div class="text-5xl font-bold text-red-400 mb-2">{{ this.totalSteps }}</div>
+        <div class="text-red-400 font-medium">❌ Noch {{ this.stepGoal - this.totalSteps }} Schritte bis zum Ziel</div>
+      }
     </mat-card>
     <mat-card routerLink="/step-goal"
               class="h-[25vh] lg:h-auto w-full p-6 rounded-2xl shadow-md flex flex-col justify-between cursor-pointer">
@@ -23,7 +28,7 @@
           Schritteziel: {{ stepGoal }}
         </div>
       </div>
-      <mat-progress-bar mode="determinate" value="83" color="primary"></mat-progress-bar>
+      <mat-progress-bar mode="determinate" value="{{100 / stepGoal * totalSteps}}" color="primary"></mat-progress-bar>
     </mat-card>
     <mat-card class="h-[25vh] lg:h-auto w-full p-6 rounded-2xl shadow-md flex flex-col items-center justify-center">
       <div class="flex items-center mb-4 text-2xl font-semibold text-gray-700">
