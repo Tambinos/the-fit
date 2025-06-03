@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {PocketBaseService} from '../pocketbase/pocket-base.service';
 import {Observable, switchMap, take} from 'rxjs';
+import {StepViewRange} from '../../enums/step-view.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -10,12 +11,11 @@ export class SettingsService {
   constructor(private pb: PocketBaseService) {
   }
 
-  saveSettings(locationAccess: boolean, notificationsEnabled: boolean): Observable<any> {
+  saveSettings(stepView: StepViewRange): Observable<any> {
     return this.pb.currentUser$.pipe(
       take(1),
       switchMap(user => {
-        user.locationAccess = locationAccess;
-        user.notificationsEnabled = notificationsEnabled;
+        user.stepViewRange = stepView;
         return this.pb.updateRecord("users", user.id, user);
       })
     );

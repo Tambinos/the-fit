@@ -1,5 +1,3 @@
-// This goes into your component's .ts file (e.g., settings.component.ts)
-
 import {Component} from '@angular/core';
 import {MatSlideToggle} from '@angular/material/slide-toggle';
 import {MatButton} from '@angular/material/button';
@@ -7,6 +5,7 @@ import {FormsModule} from '@angular/forms';
 import {Router, RouterLink} from '@angular/router';
 import {PocketBaseService} from '../../services/pocketbase/pocket-base.service';
 import {SettingsService} from '../../services/settings/settings.service';
+import {StepViewRange} from '../../enums/step-view.enum';
 import {UserService} from '../../services/user/user.service';
 
 @Component({
@@ -24,21 +23,21 @@ import {UserService} from '../../services/user/user.service';
 export class SettingsComponent {
   locationAccess = false;
   notifications = false;
+  stepViewRange: StepViewRange = StepViewRange.DAILY;
   user_id: string = ""
-
 
   constructor(private router: Router, private settingsService: SettingsService, private pb: PocketBaseService, private userService: UserService) {
     this.pb.currentUser$.subscribe(user => {
       this.locationAccess = user.locationAccess;
       this.notifications = user.notificationsEnabled;
+      this.stepViewRange = user.stepViewRange ?? StepViewRange.DAILY;
       this.user_id = user.id
     });
   }
 
   saveSettings() {
     this.settingsService.saveSettings(
-      this.locationAccess,
-      this.notifications
+      this.stepViewRange
     ).subscribe(
       response => {
         console.log('Settings saved successfully:', response);
@@ -59,4 +58,6 @@ export class SettingsComponent {
       this.router.navigate(['/login'])
     }
   }
+
+  protected readonly StepViewRange = StepViewRange;
 }

@@ -44,7 +44,7 @@
       <div>
         <div class="flex items-center mb-4 text-2xl font-semibold text-gray-700">
           <mat-icon class="mr-2 text-purple-600">bar_chart</mat-icon>
-          Verlauf heute
+          {{ getStepViewTitle() }}
         </div>
         <ul class="space-y-2">
           @for (record of stepRecords; track record) {
@@ -61,6 +61,5 @@
         </ul>
       </div>
     </mat-card>
-
   </div>
 </div>

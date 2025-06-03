@@ -8,6 +8,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {Router, RouterLink, RouterOutlet} from '@angular/router';
 import {MatCheckbox} from '@angular/material/checkbox';
 import {PocketBaseService} from './services/pocketbase/pocket-base.service';
+import {StepViewRange} from './enums/step-view.enum';
 
 @Component({
   selector: 'app-root',
@@ -66,8 +67,7 @@ export class AppComponent {
         password: this.password,
         passwordConfirm: this.repeatedPassword,
         stepGoal: 10000,
-        locationAccess: false,
-        notificationsEnabled: false
+        stepViewRange: StepViewRange.DAILY
       }
       this.pb.register(user
       ).subscribe({
