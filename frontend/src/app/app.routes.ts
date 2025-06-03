@@ -9,6 +9,7 @@ import {StepGoalInputComponent} from './components/step-goal-input/step-goal-inp
 export const appRoutes: Routes = [
   {path: '', component: AppComponent},
   {path: 'steps', component: StepInputComponent},
+  {path: 'steps/:id', component: StepInputComponent},
   {path: 'settings', component: SettingsComponent},
   {path: 'home', component: HomeComponent},
   {path: 'step-goal', component: StepGoalInputComponent},
