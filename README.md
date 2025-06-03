@@ -33,3 +33,7 @@ http://localhost:4200/
 ```
 #### Registrierung ####
 Wenn man einen neuen Account erstellt ist es wichtig, eine valid E-Mail zu verwenden und das Passwort muss 8 Zeichen lang sein.
+
+```
+#### Schritt zähler ####
+In dem feature/mobile-stepcounter branch ist der Code für den StepCounter
