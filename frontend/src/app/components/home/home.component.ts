@@ -69,6 +69,21 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/steps', id]);
   }
 
+  deleteSteps(id: string) {
+    if (confirm('Bist du sicher, dass du diesen Schritt löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.')) {
+      this.stepInputService.deleteSteps(id).subscribe({
+        next: () => {
+          this.ngOnInit();
+        },
+        error: (error) => {
+          console.error('Error deleting step record:', error);
+          alert('Error deleting step record. Please try again.');
+        }
+      });
+    }
+  }
+
+
   getFormattedTime(dateString: string): string {
     const date = new Date(dateString);
     const hours = date.getHours().toString().padStart(2, '0');

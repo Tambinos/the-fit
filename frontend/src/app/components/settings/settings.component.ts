@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {MatSlideToggle} from '@angular/material/slide-toggle';
 import {MatButton} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
 import {Router, RouterLink} from '@angular/router';
@@ -13,7 +12,6 @@ import {UserService} from '../../services/user/user.service';
   standalone: true,
   templateUrl: './settings.component.html',
   imports: [
-    MatSlideToggle,
     MatButton,
     FormsModule,
     RouterLink,
@@ -51,9 +49,9 @@ export class SettingsComponent {
   }
 
   deleteUser() {
-    if (confirm('Are you sure you want to delete your account? This action cannot be undone.')) {
+    if (confirm('Bist du sicher, dass du dein Konto löschen möchtest? Dies kann nicht rückgängig gemacht werden.')) {
       this.userService.deleteUser(this.user_id)
-      alert('Your account has been deleted.');
+      alert('Dein Konto wurde erfolgreich gelöscht. Du wirst nun abgemeldet.');
       this.pb.signOut();
       this.router.navigate(['/login'])
     }

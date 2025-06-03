@@ -5,8 +5,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatIconModule} from '@angular/material/icon';
-import {Router, RouterLink, RouterOutlet} from '@angular/router';
-import {MatCheckbox} from '@angular/material/checkbox';
+import {Router, RouterOutlet} from '@angular/router';
 import {PocketBaseService} from './services/pocketbase/pocket-base.service';
 import {StepViewRange} from './enums/step-view.enum';
 
@@ -22,7 +21,6 @@ import {StepViewRange} from './enums/step-view.enum';
     MatSlideToggleModule,
     MatIconModule,
     RouterOutlet,
-    MatCheckbox
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
