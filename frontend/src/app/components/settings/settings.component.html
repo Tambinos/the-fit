@@ -3,16 +3,20 @@
 
   <div class="w-full max-w-sm sm:max-w-md flex flex-col items-center space-y-8">
     <div class="w-full space-y-6">
-      <div class="flex items-center justify-between py-2 border-b border-gray-200 last:border-b-0">
-        <span class="text-lg text-gray-800">Standortzugriff</span>
-        <mat-slide-toggle color="primary" [(ngModel)]="locationAccess"></mat-slide-toggle>
-      </div>
-
-      <div class="flex items-center justify-between py-2 border-b border-gray-200 last:border-b-0">
-        <span class="text-lg text-gray-800">Mitteilungen</span>
-        <mat-slide-toggle color="primary" [(ngModel)]="notifications"></mat-slide-toggle>
+      <div class="flex items-center justify-between py-2 border-b border-gray-200">
+        <span class="text-lg text-gray-800">Verlaufsanzeige</span>
+        <select [(ngModel)]="stepViewRange" class="border rounded px-2 py-1">
+          <option [ngValue]="StepViewRange.DAILY">Täglich</option>
+          <option [ngValue]="StepViewRange.WEEKLY">Wöchentlich</option>
+          <option [ngValue]="StepViewRange.MONTHLY">Monatlich</option>
+          <option [ngValue]="StepViewRange.YEARLY">Jährlich</option>
+        </select>
       </div>
     </div>
+
+    <button mat-raised-button color="warn" (click)="deleteUser()">
+      Benutzer Löschen
+    </button>
 
     <div class="w-full flex flex-col items-center space-y-4 mt-12">
       <button mat-raised-button class="w-full py-4 rounded-full text-lg font-semibold shadow-md"
