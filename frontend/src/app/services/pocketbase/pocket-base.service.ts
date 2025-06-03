@@ -95,8 +95,8 @@ export class PocketBaseService {
     );
   }
 
-  deleteRecord(collectionName: string, id: string): void {
-    from(this.pb.collection(collectionName).delete(id)).pipe(
+  deleteRecord(collectionName: string, id: string): Observable<any> {
+    return from(this.pb.collection(collectionName).delete(id)).pipe(
       catchError(error => {
         console.error(`PocketBase deleteRecord (${collectionName}, ${id}) error:`, error);
         return throwError(() => error);
