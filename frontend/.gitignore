@@ -42,4 +42,4 @@ testem.log
 Thumbs.db
 
 # Pocketbase
-.pocketbase_2.28.2_windows_amd64/pb_data
+pocketbase_0.28.2_windows_amd64/pb_data
