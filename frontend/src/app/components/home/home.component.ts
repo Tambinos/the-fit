@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
   stepGoal = 0;
   stepRecords: any[] = [];
   username = '';
-  stepViewRange: string = 'daily'; // Default to daily view
+  stepViewRange: string = StepViewRange.DAILY;
 
   constructor(private stepInputService: StepInputService, private pb: PocketBaseService, private router: Router) {
 

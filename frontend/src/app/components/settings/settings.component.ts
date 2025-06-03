@@ -1,5 +1,3 @@
-// This goes into your component's .ts file (e.g., settings.component.ts)
-
 import {Component} from '@angular/core';
 import {MatSlideToggle} from '@angular/material/slide-toggle';
 import {MatButton} from '@angular/material/button';
@@ -33,7 +31,6 @@ export class SettingsComponent {
       this.locationAccess = user.locationAccess;
       this.notifications = user.notificationsEnabled;
       this.stepViewRange = user.stepViewRange ?? StepViewRange.DAILY;
-
       this.user_id = user.id
     });
   }
@@ -61,4 +58,6 @@ export class SettingsComponent {
       this.router.navigate(['/login'])
     }
   }
+
+  protected readonly StepViewRange = StepViewRange;
 }
