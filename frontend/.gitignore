@@ -40,3 +40,6 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Pocketbase
+pocketbase_0.28.2_windows_amd64/pb_data
