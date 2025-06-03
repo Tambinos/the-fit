@@ -1,4 +1,4 @@
-import {Component, NgZone, OnInit} from '@angular/core';
+import {Component, NgZone, OnDestroy, OnInit} from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
 import {MatIconButton} from '@angular/material/button';
 import {MatCard} from '@angular/material/card';
@@ -23,7 +23,7 @@ import {StepViewRange} from '../../enums/step-view.enum';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   stepCount = 0;
   totalSteps = 0;
@@ -34,6 +34,8 @@ export class HomeComponent implements OnInit {
   private subscription: Subscription | undefined;
   username = '';
   stepViewRange: string = StepViewRange.DAILY;
+  private autoSaveInterval: any;
+
 
   constructor(private stepService: StepCountService, private ngZone: NgZone, private stepInputService: StepInputService, private pb: PocketBaseService, private router: Router) {}
 
@@ -63,7 +65,40 @@ export class HomeComponent implements OnInit {
       this.start();
 
     });
+
+    this.autoSaveInterval = setInterval(() => {
+      if (this.stepCount > 0) {
+        const stepsToSave = this.stepCount;
+
+        this.stepInputService.saveSteps(stepsToSave).subscribe({
+          next: () => {
+            const newRecord = {
+              steps: stepsToSave,
+              created: new Date().toISOString()
+            };
+            this.todayStepRecords.push(newRecord);
+
+            this.stepCount = 0;
+            this.updateTodaySteps();
+            console.log('Auto-saved steps:', stepsToSave);
+          },
+          error: (err) => console.error('❌ Auto-save error:', err)
+        });
+      }
+    }, 3 * 60 * 1000);
+
   }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+
+    if (this.autoSaveInterval) {
+      clearInterval(this.autoSaveInterval);
+    }
+  }
+
 
   start() {
     this.stepService.startTracking();
@@ -90,6 +125,21 @@ export class HomeComponent implements OnInit {
   editSteps(id: string) {
     this.router.navigate(['/steps', id]);
   }
+
+  deleteSteps(id: string) {
+    if (confirm('Bist du sicher, dass du diesen Schritt löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden.')) {
+      this.stepInputService.deleteSteps(id).subscribe({
+        next: () => {
+          this.ngOnInit();
+        },
+        error: (error) => {
+          console.error('Error deleting step record:', error);
+          alert('Error deleting step record. Please try again.');
+        }
+      });
+    }
+  }
+
 
   getFormattedTime(dateString: string): string {
     const date = new Date(dateString);

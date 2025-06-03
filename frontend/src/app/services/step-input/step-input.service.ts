@@ -37,6 +37,10 @@ export class StepInputService {
     );
   }
 
+  deleteSteps(recordId: string) {
+    return this.pb.deleteRecord('steps', recordId);
+  }
+
   getStepWithId(recordId: string): Observable<any[]> {
     return this.pb.getCollection("steps", {
       filter: `id = "${recordId}"`,
